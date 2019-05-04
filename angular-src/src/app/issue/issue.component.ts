@@ -1,6 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {Location} from '@angular/common';
-import {ActivatedRoute} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 
 @Component({
   selector: 'app-issue',
@@ -11,7 +11,7 @@ export class IssueComponent implements OnInit {
 
   @Input() id: string;
 
-  constructor(private route: ActivatedRoute, private location: Location) {
+  constructor(private route: ActivatedRoute, private router: Router, private location: Location) {
 
   }
 
@@ -21,6 +21,13 @@ export class IssueComponent implements OnInit {
 
   // gets current issue
   private getIssue() {
-    this.id = this.route.snapshot.paramMap.get('id');
+    const issueHashCode = location.hash.substr(1);
+    if (issueHashCode) {
+      this.id = issueHashCode;
+    } else {
+      console.log('...navigating to root');
+
+      this.router.navigateByUrl('/dashboard');
+    }
   }
 }

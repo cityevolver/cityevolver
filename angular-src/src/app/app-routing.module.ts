@@ -5,8 +5,8 @@ import {MapOverviewComponent} from './map-overview/map-overview.component';
 
 const routes: Routes = [
   { path: 'dashboard', component: MapOverviewComponent },
-  { path: 'issue/:id', component: IssueComponent },
-  { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
+  { path: 'issue', component: IssueComponent },
+  { path: '', redirectTo: 'issue', pathMatch: 'full'},
 ];
 
 @NgModule({
