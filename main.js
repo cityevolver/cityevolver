@@ -263,7 +263,7 @@ var DataApiService = /** @class */ (function () {
         this.http = http;
     }
     DataApiService.prototype.getIssue = function () {
-        var path = 'http://ec2-3-121-125-47.eu-central-1.compute.amazonaws.com:8080/issue';
+        var path = 'https://ec2-3-121-125-47.eu-central-1.compute.amazonaws.com:8080/issue';
         var httpParams = new _angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpParams"]();
         // if (requestId !== undefined && requestId !== null) {
         //   httpParams = httpParams.set('requestId', requestId);
