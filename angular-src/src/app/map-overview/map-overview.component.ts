@@ -6,7 +6,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./map-overview.component.scss']
 })
 export class MapOverviewComponent implements OnInit {
-  private title = 'City evolver APP!';
+  title = 'City evolver APP!';
 
   constructor() { }
 
