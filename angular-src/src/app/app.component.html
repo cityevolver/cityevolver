@@ -1,3 +1,6 @@
-<app-issue *ngIf="!!issueId"
+<app-issue *ngIf="!!issueId && issueTypes"
            [id]="issueId"></app-issue>
-<app-map-overview *ngIf="!issueId"></app-map-overview>
+<app-map-overview *ngIf="!issueId && issueTypes"></app-map-overview>
+<section *ngIf="issueTypesLoadError">
+  <h3>Fatal error :-(</h3>
+</section>
