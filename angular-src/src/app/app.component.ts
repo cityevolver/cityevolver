@@ -14,7 +14,8 @@ export class AppComponent implements OnInit, AfterViewChecked {
   }
 
   ngAfterViewChecked(): void {
-    this.getIssue();
+    setTimeout(() =>
+      this.getIssue(), 0);
   }
 
   // gets current issue
