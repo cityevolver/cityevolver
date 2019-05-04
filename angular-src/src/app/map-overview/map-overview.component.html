@@ -1,14 +1,15 @@
-<div style="text-align:center">
-  <h1>
-    Welcome to {{ title }}!
-  </h1>
-</div>
-<h2>Here is the map of issues you can help to solve by your vote! </h2>
+<ng-container *ngIf="allIssuesData">
+  <section class="container">
+    <h1>
+      Welcome to {{ title }}!
+    </h1>
+    <h2>Here is the map of issues you can help to solve by your vote! </h2>
 
-<img src="https://www.placecage.com/gif/500/500">
-
-<p>
-  <a href="#11">toto je link na issue 11</a>
-</p>
-
-a potom konec :)
+    <p *ngFor="let issue of allIssuesData">
+      <a [href]="'#' + issue.id">{{issue.title}}</a>
+    </p>
+  </section>
+</ng-container>
+<section *ngIf="issuesLoadError">
+  <h3>Failed loading all issues :-(</h3>
+</section>
