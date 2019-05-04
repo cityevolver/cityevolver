@@ -2,6 +2,28 @@
   <section class="container">
     <h1>{{issueData.title}}</h1>
     <p>{{issueData.description}}</p>
+
+    <p style="font-style: italic">Type of issue: {{issueData.issue_type.text}}</p>
+
+    <section *ngIf="issueVotes && !userAlreadyVoted"
+             class="votes-for-voting-container">
+      <div *ngFor="let vote of issueVotes"
+                class="vote"
+                (click)="userVoted(vote.id)">
+        {{vote.text}}
+      </div>
+    </section>
+    <section *ngIf="issueVotes && userAlreadyVoted"
+             class="votes-overview-container">
+      <div *ngFor="let vote of issueVotes"
+           class="vote">
+        {{vote.text}}
+        <div>Hlasů: {{vote.vote_count}}</div>
+      </div>
+    </section>
+    <ng-container *ngIf="issueVotesLoadError">
+      <h5>Not possible to vote :-(</h5>
+    </ng-container>
   </section>
 </ng-container>
 <section *ngIf="issueLoadError">

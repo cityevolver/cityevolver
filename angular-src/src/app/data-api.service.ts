@@ -22,6 +22,20 @@ export class DataApiService {
     return this.http.request<any>('GET', path, requestOptions);
   }
 
+  public getIssueVotes(issueId: string): Observable<Array<IssueVote>> {
+    const path = 'https://ec2-3-121-125-47.eu-central-1.compute.amazonaws.com:8080/response';
+
+    let httpParams = new HttpParams();
+    if (issueId !== undefined && issueId !== null) {
+      httpParams = httpParams.set('issue', issueId);
+    }
+    const requestOptions = {
+      params: httpParams
+    };
+
+    return this.http.request<any>('GET', path, requestOptions);
+  }
+
   public getAllIssues(): Observable<Array<IssueDetail>> {
     const path = 'https://ec2-3-121-125-47.eu-central-1.compute.amazonaws.com:8080/issue';
 
@@ -49,9 +63,19 @@ export class IssueDetail {
   id: number;
   title: string;
   description: string;
+  issue_type: IssueType;
+  image_url: string;
 }
 
 export class IssueType {
   id: number;
   text: string;
+}
+
+export class IssueVote {
+  id: number;
+  text: string;
+  vote_count: number;
+  icon_code: string;
+  can_have_message: boolean;
 }

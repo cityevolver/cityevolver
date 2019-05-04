@@ -1,5 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {DataApiService, IssueDetail, IssueType} from '../data-api.service';
+import {DataApiService, IssueDetail, IssueType, IssueVote} from '../data-api.service';
 
 @Component({
   selector: 'app-issue',
@@ -22,10 +22,17 @@ export class IssueComponent implements OnInit {
 
   // all loaded data about the issue
   issueData: IssueDetail;
+  // all possible votes for the issue
+  issueVotes: Array<IssueVote>;
 
   // issue not found
   issueLoadError: boolean;
+  // issue votes not found
+  issueVotesLoadError: boolean;
   cancelReload: boolean;
+
+  //TODO from cookie
+  userAlreadyVoted: boolean;
 
   constructor(protected dataApi: DataApiService) { }
 
@@ -40,8 +47,10 @@ export class IssueComponent implements OnInit {
 
     this.dataApi.getIssue(this.id).subscribe(response => {
       this.issueData = response;
+      this.getVotesOnIssue();
     }, error => {
       this.issueData = null;
+      this.issueVotes = null;
       this.issueLoadError = true;
       this.cancelReload = false;
 
@@ -51,6 +60,24 @@ export class IssueComponent implements OnInit {
         }
       }, 2000);
     });
+  }
+
+  // gets all possible votes on an issue
+  private getVotesOnIssue() {
+    this.issueVotesLoadError = false;
+
+    this.dataApi.getIssueVotes(this.id).subscribe(response => {
+      this.issueVotes = response;
+    }, error => {
+      this.issueVotes = null;
+      this.issueVotesLoadError = true;
+    });
+  }
+
+  // user has voted
+  userVoted(responseId: number) {
+    console.info('User has voted for a response number: ', responseId);
+    this.userAlreadyVoted = true;
   }
 }
 
