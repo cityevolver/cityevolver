@@ -5,11 +5,18 @@
     </h1>
     <h2>Here is the map of issues you can help to solve by your vote! </h2>
 
-    <p *ngFor="let issue of allIssuesData">
-      <a [href]="'#' + issue.id">{{issue.title}}</a>
-    </p>
+    <div id="mapid" style="width: 600px; height: 400px; position: relative;"></div>
+
+    <section class="list-of-issues-container">
+      <p *ngFor="let issue of allIssuesData">
+        <a [href]="'#' + issue.id">{{issue.title}}</a>
+      </p>
+    </section>
   </section>
 </ng-container>
 <section *ngIf="issuesLoadError">
   <h3>Failed loading all issues :-(</h3>
 </section>
+
+
+
