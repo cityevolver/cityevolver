@@ -36,18 +36,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
 /* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
-/* harmony import */ var _issue_issue_component__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./issue/issue.component */ "./src/app/issue/issue.component.ts");
-/* harmony import */ var _map_overview_map_overview_component__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./map-overview/map-overview.component */ "./src/app/map-overview/map-overview.component.ts");
 
 
 
-
-
-var routes = [
-    { path: 'dashboard', component: _map_overview_map_overview_component__WEBPACK_IMPORTED_MODULE_4__["MapOverviewComponent"] },
-    { path: 'issue', component: _issue_issue_component__WEBPACK_IMPORTED_MODULE_3__["IssueComponent"] },
-    { path: '', redirectTo: 'issue', pathMatch: 'full' },
-];
+var routes = [];
 var AppRoutingModule = /** @class */ (function () {
     function AppRoutingModule() {
     }
@@ -71,7 +63,7 @@ var AppRoutingModule = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<router-outlet></router-outlet>\r\n"
+module.exports = "<app-issue *ngIf=\"!!issueId\"\r\n           [id]=\"issueId\"></app-issue>\r\n<app-map-overview *ngIf=\"!issueId\"></app-map-overview>\r\n"
 
 /***/ }),
 
@@ -103,6 +95,22 @@ __webpack_require__.r(__webpack_exports__);
 var AppComponent = /** @class */ (function () {
     function AppComponent() {
     }
+    AppComponent.prototype.ngOnInit = function () {
+        this.getIssue();
+    };
+    AppComponent.prototype.ngAfterViewChecked = function () {
+        this.getIssue();
+    };
+    // gets current issue
+    AppComponent.prototype.getIssue = function () {
+        var issueHashCode = location.hash.substr(1);
+        if (issueHashCode) {
+            this.issueId = issueHashCode;
+        }
+        else {
+            this.issueId = null;
+        }
+    };
     AppComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
             selector: 'app-root',
@@ -276,14 +284,14 @@ var IssueComponent = /** @class */ (function () {
     };
     // gets current issue
     IssueComponent.prototype.getIssue = function () {
-        var issueHashCode = location.hash.substr(1);
-        if (issueHashCode) {
-            this.id = issueHashCode;
-        }
-        else {
-            console.log('...navigating to root');
-            this.router.navigateByUrl('/dashboard');
-        }
+        // const issueHashCode = location.hash.substr(1);
+        // if (issueHashCode) {
+        //   this.id = issueHashCode;
+        // } else {
+        //   console.log('...navigating to root');
+        //
+        //   this.router.navigateByUrl('/dashboard');
+        // }
     };
     tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Input"])(),

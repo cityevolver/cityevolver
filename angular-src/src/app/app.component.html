@@ -1,1 +1,3 @@
-<router-outlet></router-outlet>
+<app-issue *ngIf="!!issueId"
+           [id]="issueId"></app-issue>
+<app-map-overview *ngIf="!issueId"></app-map-overview>

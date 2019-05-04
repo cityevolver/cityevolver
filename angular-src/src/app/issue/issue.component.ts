@@ -21,13 +21,13 @@ export class IssueComponent implements OnInit {
 
   // gets current issue
   private getIssue() {
-    const issueHashCode = location.hash.substr(1);
-    if (issueHashCode) {
-      this.id = issueHashCode;
-    } else {
-      console.log('...navigating to root');
-
-      this.router.navigateByUrl('/dashboard');
-    }
+    // const issueHashCode = location.hash.substr(1);
+    // if (issueHashCode) {
+    //   this.id = issueHashCode;
+    // } else {
+    //   console.log('...navigating to root');
+    //
+    //   this.router.navigateByUrl('/dashboard');
+    // }
   }
 }
