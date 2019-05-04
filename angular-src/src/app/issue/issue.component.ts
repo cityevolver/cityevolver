@@ -1,6 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {Location} from '@angular/common';
-import {ActivatedRoute, Router} from '@angular/router';
+import {DataApiService} from "../data-api.service";
 
 @Component({
   selector: 'app-issue',
@@ -11,8 +10,7 @@ export class IssueComponent implements OnInit {
 
   @Input() id: string;
 
-  constructor(private route: ActivatedRoute, private router: Router, private location: Location) {
-
+  constructor(protected dataApi: DataApiService) {
   }
 
   ngOnInit() {
@@ -21,6 +19,12 @@ export class IssueComponent implements OnInit {
 
   // gets current issue
   private getIssue() {
+    console.log('Loading an issue with code: ', this.id);
+
+    this.dataApi.getIssue().subscribe(response => {
+      console.log('Output: ', response);
+    });
+
     // const issueHashCode = location.hash.substr(1);
     // if (issueHashCode) {
     //   this.id = issueHashCode;

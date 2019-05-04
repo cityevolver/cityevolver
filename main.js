@@ -36,6 +36,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
 /* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
+/* harmony import */ var _data_api_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./data-api.service */ "./src/app/data-api.service.ts");
+
 
 
 
@@ -46,7 +48,8 @@ var AppRoutingModule = /** @class */ (function () {
     AppRoutingModule = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["NgModule"])({
             imports: [_angular_router__WEBPACK_IMPORTED_MODULE_2__["RouterModule"].forRoot(routes)],
-            exports: [_angular_router__WEBPACK_IMPORTED_MODULE_2__["RouterModule"]]
+            exports: [_angular_router__WEBPACK_IMPORTED_MODULE_2__["RouterModule"]],
+            providers: [_data_api_service__WEBPACK_IMPORTED_MODULE_3__["DataApiService"]]
         })
     ], AppRoutingModule);
     return AppRoutingModule;
@@ -99,7 +102,10 @@ var AppComponent = /** @class */ (function () {
         this.getIssue();
     };
     AppComponent.prototype.ngAfterViewChecked = function () {
-        this.getIssue();
+        var _this = this;
+        setTimeout(function () {
+            return _this.getIssue();
+        }, 0);
     };
     // gets current issue
     AppComponent.prototype.getIssue = function () {
@@ -143,6 +149,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _map_overview_map_overview_component__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./map-overview/map-overview.component */ "./src/app/map-overview/map-overview.component.ts");
 /* harmony import */ var _issue_issue_component__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./issue/issue.component */ "./src/app/issue/issue.component.ts");
 /* harmony import */ var _create_issue_create_issue_component__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./create-issue/create-issue.component */ "./src/app/create-issue/create-issue.component.ts");
+/* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @angular/common/http */ "./node_modules/@angular/common/fesm5/http.js");
+
 
 
 
@@ -164,6 +172,7 @@ var AppModule = /** @class */ (function () {
             ],
             imports: [
                 _angular_platform_browser__WEBPACK_IMPORTED_MODULE_1__["BrowserModule"],
+                _angular_common_http__WEBPACK_IMPORTED_MODULE_8__["HttpClientModule"],
                 _app_routing_module__WEBPACK_IMPORTED_MODULE_3__["AppRoutingModule"]
             ],
             providers: [],
@@ -233,6 +242,52 @@ var CreateIssueComponent = /** @class */ (function () {
 
 /***/ }),
 
+/***/ "./src/app/data-api.service.ts":
+/*!*************************************!*\
+  !*** ./src/app/data-api.service.ts ***!
+  \*************************************/
+/*! exports provided: DataApiService */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "DataApiService", function() { return DataApiService; });
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+/* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/common/http */ "./node_modules/@angular/common/fesm5/http.js");
+
+
+
+var DataApiService = /** @class */ (function () {
+    function DataApiService(http) {
+        this.http = http;
+    }
+    DataApiService.prototype.getIssue = function () {
+        var path = 'http://ec2-3-121-125-47.eu-central-1.compute.amazonaws.com:8080/issue';
+        var httpParams = new _angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpParams"]();
+        // if (requestId !== undefined && requestId !== null) {
+        //   httpParams = httpParams.set('requestId', requestId);
+        // }
+        var requestOptions = {
+            params: httpParams
+        };
+        console.log('Getting issue from', path);
+        console.log('with params', requestOptions);
+        return this.http.request('GET', path, requestOptions);
+    };
+    DataApiService = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Injectable"])({
+            providedIn: 'root'
+        }),
+        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpClient"]])
+    ], DataApiService);
+    return DataApiService;
+}());
+
+
+
+/***/ }),
+
 /***/ "./src/app/issue/issue.component.html":
 /*!********************************************!*\
   !*** ./src/app/issue/issue.component.html ***!
@@ -267,23 +322,23 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "IssueComponent", function() { return IssueComponent; });
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
-/* harmony import */ var _angular_common__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/common */ "./node_modules/@angular/common/fesm5/common.js");
-/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
-
+/* harmony import */ var _data_api_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../data-api.service */ "./src/app/data-api.service.ts");
 
 
 
 var IssueComponent = /** @class */ (function () {
-    function IssueComponent(route, router, location) {
-        this.route = route;
-        this.router = router;
-        this.location = location;
+    function IssueComponent(dataApi) {
+        this.dataApi = dataApi;
     }
     IssueComponent.prototype.ngOnInit = function () {
         this.getIssue();
     };
     // gets current issue
     IssueComponent.prototype.getIssue = function () {
+        console.log('Loading an issue with code: ', this.id);
+        this.dataApi.getIssue().subscribe(function (response) {
+            console.log('Output: ', response);
+        });
         // const issueHashCode = location.hash.substr(1);
         // if (issueHashCode) {
         //   this.id = issueHashCode;
@@ -303,7 +358,7 @@ var IssueComponent = /** @class */ (function () {
             template: __webpack_require__(/*! ./issue.component.html */ "./src/app/issue/issue.component.html"),
             styles: [__webpack_require__(/*! ./issue.component.scss */ "./src/app/issue/issue.component.scss")]
         }),
-        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_angular_router__WEBPACK_IMPORTED_MODULE_3__["ActivatedRoute"], _angular_router__WEBPACK_IMPORTED_MODULE_3__["Router"], _angular_common__WEBPACK_IMPORTED_MODULE_2__["Location"]])
+        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_data_api_service__WEBPACK_IMPORTED_MODULE_2__["DataApiService"]])
     ], IssueComponent);
     return IssueComponent;
 }());

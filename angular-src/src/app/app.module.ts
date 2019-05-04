@@ -6,6 +6,7 @@ import { AppComponent } from './app.component';
 import { MapOverviewComponent } from './map-overview/map-overview.component';
 import { IssueComponent } from './issue/issue.component';
 import { CreateIssueComponent } from './create-issue/create-issue.component';
+import {HttpClientModule} from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -16,6 +17,7 @@ import { CreateIssueComponent } from './create-issue/create-issue.component';
   ],
   imports: [
     BrowserModule,
+    HttpClientModule,
     AppRoutingModule
   ],
   providers: [],
