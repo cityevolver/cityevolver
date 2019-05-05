@@ -77,7 +77,6 @@ export class IssueComponent implements OnInit {
 
   private resolveAlreadyVotedByCookie() {
     let cookieValue = this.getCookie('cityQR-voted' + this.id);
-    console.log('cookie: ', cookieValue);
 
     this.userAlreadyVoted = !!cookieValue;
   }

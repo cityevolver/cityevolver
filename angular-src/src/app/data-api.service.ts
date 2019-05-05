@@ -6,7 +6,7 @@ import {Observable} from 'rxjs';
   providedIn: 'root'
 })
 export class DataApiService {
-  baseUrl = 'https://ec2-3-121-125-47.eu-central-1.compute.amazonaws.com:8080';
+  baseUrl = 'https://naprava.cz:8080';
 
   constructor(protected http: HttpClient) { }
 
