@@ -1,12 +1,16 @@
+
 <ng-container *ngIf="issueData">
 
-  <section class="container">
+  <section class="container"
+           [ngClass]="{'ballot': issueData.issue_type.id === 3, 'complaint': issueData.issue_type.id === 2, 'information': issueData.issue_type.id === 1}">
+    <div class="image-container">
+      <img id="logo" src="/img/logo.png">
+    </div>
     <h1>{{issueData.title}}</h1>
     <p>Made by: {{issueData.author}}</p>
     <p>{{issueData.description}}</p>
-
-    <div class="obrazek">
-    <img src="{{issueData.image_url}}">
+    <div class="image-container">
+      <img src="{{issueData.image_url}}">
     </div>
 
     <p style="font-style: italic">Type of issue: {{issueData.issue_type.text}}</p>

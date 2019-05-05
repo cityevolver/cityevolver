@@ -1,11 +1,21 @@
+$ballot-background: #c20f2c;
+$ballot-button-hover: #890004;
+$ballot-text: white;
+$complaint-background: #3C6AA2;
+$complaint-button-hover: #0e417e;
+$information-background: #DCF14C;
+$information-button-hover: #a5bc06;
+
 section.container {
   max-width: 1000px;
-
   background-color: #F2F2F2;
+
+
+
   font-family: 'Roboto', sans-serif;
   border: 3px solid #173C40;
 
- .obrazek {
+ .image-container {
    display: flex;
    align-items: center;
    justify-content: center;
@@ -27,7 +37,7 @@ section.container {
     text-align: center;
     vertical-align: top;
     padding: 20px 0px;
-    margin: 30px auto 50px auto;
+    margin: 0 auto 50px auto;
 
   }
 
@@ -70,6 +80,30 @@ section.container {
       background: #D8D9D0;
       border-radius: 30px;
       font-size: 18px;
+    }
+  }
+
+  &.ballot {
+    background-color: $ballot-background;
+
+    color: white;
+
+    section.votes-for-voting-container {
+      div.vote {
+        color: white;
+
+        &:hover {
+          background-color: $ballot-button-hover;
+        }
+      }
+    }
+
+    &.complaint {
+      background-color: $complaint-background;
+    }
+
+    &.information {
+      background-color: $information-background;
     }
   }
 }
