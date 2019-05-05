@@ -1,5 +1,6 @@
+backend/data
 backend/__pycache__
 backend/*.py~
 backend/db.db
-
+backend/.ipynb_checkpoints/
 /.idea

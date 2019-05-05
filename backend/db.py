@@ -4,6 +4,8 @@ import os.path
 from peewee import *
 from playhouse.shortcuts import model_to_dict, dict_to_model
 
+import realtime
+
 
 db_filename = "db.db"
 
@@ -30,16 +32,27 @@ class MyModel(Model):
 
 
 class IssueType(MyModel):
+    INFORMATION = 1
+    COMPLAINT = 2
+    BALLOT = 3
     text = CharField()
 
 class Issue(MyModel):
     title = CharField()
     description = TextField()
+    author = CharField()
     image_url = CharField(null=True)
     issue_type = ForeignKeyField(IssueType)
     geo_x = FloatField()
     geo_y = FloatField()
 
+    def to_dict(self):
+        d = super(Issue, self).to_dict()
+        if self.description.startswith("@get_current_meteodata"):
+            param = self.description.split(" ")[1]
+            d.update({"description": realtime.get_current_meteodata(param)})
+        return d
+    
 class Response(MyModel):
     issue = ForeignKeyField(Issue, backref="responses")
     text = CharField()
@@ -65,12 +78,13 @@ def init():
         print("Creating db ... ", sep="")
         db.create_tables([IssueType, Issue, Response, Vote])
         
-        IssueType.create(id=1, text="Information")
-        IssueType.create(id=2, text="Issue")
-        IssueType.create(id=3, text="Vote")
+        IssueType.create(id=IssueType.INFORMATION, text="Information")
+        IssueType.create(id=IssueType.COMPLAINT, text="Complaint")
+        IssueType.create(id=IssueType.BALLOT, text="Ballot")
         
         Issue.create(id=1, title="Old town square reconstruction",
-                     description="...",
+                     description="...", author="MHMP",
+                     image_url="http://www4.pictures.zimbio.com/bg/Nicolas+Cage+Nicolas+Cage+Salt+Lake+City+Airport+ihMV26dY4Hul.jpg",
                      issue_type=3, geo_x=14.4210554, geo_y=50.0875187)
         Response.create(issue=1, id=1, text="Plant more trees.", can_have_message=False)
         Vote.create(issue=1, response=1)
@@ -81,6 +95,7 @@ def init():
         
         Issue.create(id=2, title="Should I. P. Pavlova metro station have another entrance?",
                      description="It's very busy station and another entrance would cut travel time for a lot of people.",
+                     author="MHMP",
                      issue_type=3, geo_x=14.4304700, geo_y=50.0753122)
         Response.create(issue=2, id=4, text="Yes", can_have_message=True, icon_code="check_circle")
         Vote.create(issue=2, response=4)
@@ -89,3 +104,6 @@ def init():
         Vote.create(issue=2, response=5, message="No to jste se asi posrali, DEBILOVÉ!!!")
 
         print("OK")
+
+def close():
+    return db.close()
