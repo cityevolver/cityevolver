@@ -66,7 +66,7 @@ class IssueCode(MyModel):
     issue = ForeignKeyField(Issue, backref="codes")
 
     def url(self):
-        return "https://ec2-3-121-125-47.eu-central-1.compute.amazonaws.com:8080/codes/{}.png".format(self.id)
+        return "https://naprava.cz:8080/codes/{}.png".format(self.id)
     
     def make_qr(self):
         filename = "codes/{}.png".format(self.id)
@@ -131,6 +131,15 @@ def init():
                              author="MČ Praha 7",
                              image_url="https://www.praha7.cz/wp-content/uploads/2018/02/%C3%BA%C5%99ad.jpg",
                              issue_type=IssueType.GATHERING, geo_x=14.4339447, geo_y=50.0969988)
+        issue.add_qr()
+
+        issue = Issue.create(id=4, title="What was the best part of the hackaton?",
+                             description="Our app allows the citizens to get involved. Why not use it as well for the hackaton?",
+                             author="CitiQR team", issue_type=IssueType.BALLOT, geo_x=14.4174666, geo_y=50.0729676)
+        Response.create(issue=4, id=6, text="The hacking.", can_have_message=False)
+        Response.create(issue=4, id=7, text="The people.", can_have_message=False)
+        Response.create(issue=4, id=8, text="The food.", can_have_message=False)
+        Response.create(issue=4, id=9, text="The idea.", can_have_message=False)
         issue.add_qr()
         
         print("OK")
