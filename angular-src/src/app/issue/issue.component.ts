@@ -67,6 +67,7 @@ export class IssueComponent implements OnInit {
     this.issueVotesLoadError = false;
 
     this.dataApi.getIssueVotes(this.id).subscribe(response => {
+      this.resolveAlreadyVotedByCookie();
       this.issueVotes = response;
     }, error => {
       this.issueVotes = null;
@@ -74,10 +75,36 @@ export class IssueComponent implements OnInit {
     });
   }
 
+  private resolveAlreadyVotedByCookie() {
+    let cookieValue = this.getCookie('cityQR-voted' + this.id);
+
+    this.userAlreadyVoted = !!cookieValue;
+  }
+
+  private getCookie(cname) {
+    var name = cname + '=';
+    var ca = document.cookie.split(';');
+    for(var i = 0; i < ca.length; i++) {
+      var c = ca[i];
+      while (c.charAt(0) === ' ') {
+        c = c.substring(1);
+      }
+      if (c.indexOf(name) === 0) {
+        return c.substring(name.length, c.length);
+      }
+    }
+    return '';
+  }
+
+  private setCookie(cname, cvalue) {
+    document.cookie = cname + '=' + cvalue + ';';
+  }
+
   // user has voted
   userVoted(responseId: number) {
     this.dataApi.setVote(this.id, responseId).subscribe(response => {
       this.userAlreadyVoted = true;
+      this.setCookie('cityQR-voted' + this.id, true);
       this.getIssue();
     }, error => {
       console.error(error);
@@ -86,7 +113,7 @@ export class IssueComponent implements OnInit {
     });
   }
 
-  //go back
+  // go back
   buttonBackClicked() {
     location.hash = '';
   }

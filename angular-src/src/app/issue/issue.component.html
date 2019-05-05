@@ -2,7 +2,8 @@
 <ng-container *ngIf="issueData">
 
   <section class="container"
-           [ngClass]="{'ballot': issueData.issue_type.id === 3, 'complaint': issueData.issue_type.id === 2, 'information': issueData.issue_type.id === 1}">
+           [ngClass]="{'ballot': issueData.issue_type.id === 3, 'complaint': issueData.issue_type.id === 2, 'information': issueData.issue_type.id === 1,
+            'gathering': issueData.issue_type.id === 4}">
     <div class="button-back"
          (click)="buttonBackClicked()">
       <img id="logo" src="/img/logo.png">
@@ -27,10 +28,12 @@
 
     <section *ngIf="issueVotes && userAlreadyVoted"
              class="votes-overview-container">
+      <div class="voted-text">You have already voted in this issue.</div>
+
       <div *ngFor="let vote of issueVotes"
            class="vote">
         {{vote.text}}
-        <div>Hlasů: {{vote.vote_count}}</div>
+        <div class="votes-total">Total votes: {{vote.vote_count}}</div>
       </div>
     </section>
     <ng-container *ngIf="issueVotesLoadError">

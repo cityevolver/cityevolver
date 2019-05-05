@@ -6,17 +6,29 @@ section.container {
   font-family: 'Roboto', sans-serif;
   border: 3px solid #173C40;
 
-  h1{
-    height: 43px;
-    color: #173C40;
+  .main_logo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  h1 {
+    color: black;
     font-family: 'Maven Pro', sans-serif;
-    font-size: 36px;
-    font-weight: 900;
-    line-height: 32px;
+    font-size: 60px;
+    line-height: 1.5;
     text-align: center;
     vertical-align: top;
-    padding: 20px 0px;
-    margin: 30px auto 50px auto;
+    margin: 0px auto 0px auto;
+  }
+  h4 {
+    color: black;
+    font-size: 40px;
+    font-family: 'Maven Pro', sans-serif;
+    line-height: 1.5;
+    text-align: center;
+    vertical-align: top;
+    margin: -10px auto 20px auto;
   }
 
 
@@ -27,7 +39,29 @@ section.container {
   }
 
 
+  .button-show-me {
+    cursor: pointer;
+
+    width: 80%;
+    max-width: 400px;
+    text-align: center;
+    padding: 10px;
+    margin: 10px auto;
+    box-sizing: border-box;
+    border: 1px solid #173C40;
+    background: #D8D9D0;
+    border-radius: 10px;
+    font-size: 18px;
+
+    &:hover {
+      background-color: #a7a89f;
+    }
+  }
+
   .list-of-issues-container {
+    p {
+      text-align: center;
+    }
   }
 }
 

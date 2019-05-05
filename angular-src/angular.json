@@ -23,7 +23,11 @@
             "polyfills": "src/polyfills.ts",
             "tsConfig": "src/tsconfig.app.json",
             "assets": [
-              "src/favicon.ico",
+              "src/marker-icon-2x.png",
+              "src/layers.png",
+              "src/layers-2x.png",
+              "src/marker-icon.png",
+              "src/marker-shadow.png",
               "src/assets",
               "src/img"
             ],
