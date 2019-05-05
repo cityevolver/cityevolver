@@ -52,5 +52,12 @@ export class MapOverviewComponent implements OnInit {
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
       attribution: '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
     }).addTo(map);
+
+
+
+    for (const issue of this.allIssuesData) {
+      L.marker([issue.geo_y, issue.geo_x]).addTo(map)
+        .bindPopup('<a href="#' + issue.id + '">' + issue.title + '</a>');
+    }
   }
 }

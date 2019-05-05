@@ -1,7 +1,13 @@
 <ng-container *ngIf="issueData">
+
   <section class="container">
     <h1>{{issueData.title}}</h1>
+    <p>Made by: {{issueData.author}}</p>
     <p>{{issueData.description}}</p>
+
+    <div class="obrazek">
+    <img src="{{issueData.image_url}}">
+    </div>
 
     <p style="font-style: italic">Type of issue: {{issueData.issue_type.text}}</p>
 
@@ -13,6 +19,7 @@
         {{vote.text}}
       </div>
     </section>
+
     <section *ngIf="issueVotes && userAlreadyVoted"
              class="votes-overview-container">
       <div *ngFor="let vote of issueVotes"

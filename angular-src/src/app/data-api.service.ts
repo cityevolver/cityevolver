@@ -65,6 +65,9 @@ export class IssueDetail {
   description: string;
   issue_type: IssueType;
   image_url: string;
+  author: string;
+  geo_x: number;
+  geo_y: number;
 }
 
 export class IssueType {

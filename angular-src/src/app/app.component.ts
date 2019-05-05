@@ -49,4 +49,7 @@ export class AppComponent implements OnInit, AfterViewChecked {
       this.issueId = null;
     }
   }
+
+
+
 }
