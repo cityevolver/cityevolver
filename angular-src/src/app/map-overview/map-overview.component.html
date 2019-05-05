@@ -5,7 +5,13 @@
     </h1>
     <div id="mapid"></div>
 
-    <section class="list-of-issues-container">
+    <div class="button-show-me"
+         (click)="listOfIssuesVisible = !listOfIssuesVisible">
+      {{listOfIssuesVisible?'Hide the ':'Show me '}}list of all issues
+    </div>
+
+    <section *ngIf="listOfIssuesVisible"
+              class="list-of-issues-container">
       <p *ngFor="let issue of allIssuesData">
         <a [href]="'#' + issue.id">{{issue.title}}</a>
       </p>

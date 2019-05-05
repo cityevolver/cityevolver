@@ -27,7 +27,29 @@ section.container {
   }
 
 
+  .button-show-me {
+    cursor: pointer;
+
+    width: 80%;
+    max-width: 400px;
+    text-align: center;
+    padding: 30px;
+    margin: 10px auto;
+    box-sizing: border-box;
+    border: 1px solid #173C40;
+    background: #D8D9D0;
+    border-radius: 30px;
+    font-size: 18px;
+
+    &:hover {
+      background-color: #3FA69B;
+    }
+  }
+
   .list-of-issues-container {
+    p {
+      text-align: center;
+    }
   }
 }
 

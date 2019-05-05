@@ -19,6 +19,8 @@ export class MapOverviewComponent implements OnInit {
   // issue not found
   issuesLoadError: boolean;
 
+  listOfIssuesVisible: boolean;
+
   constructor(protected dataApi: DataApiService) { }
 
   ngOnInit() {
