@@ -27,6 +27,8 @@
 
     <section *ngIf="issueVotes && userAlreadyVoted"
              class="votes-overview-container">
+      <div class="voted-text">You have already voted in this issue.</div>
+
       <div *ngFor="let vote of issueVotes"
            class="vote">
         {{vote.text}}
