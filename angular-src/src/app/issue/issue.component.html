@@ -33,7 +33,7 @@
       <div *ngFor="let vote of issueVotes"
            class="vote">
         {{vote.text}}
-        <div>Hlasů: {{vote.vote_count}}</div>
+        <div class="votes-total">Total votes: {{vote.vote_count}}</div>
       </div>
     </section>
     <ng-container *ngIf="issueVotesLoadError">

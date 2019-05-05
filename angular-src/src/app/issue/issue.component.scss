@@ -110,6 +110,11 @@ section.container {
       background: #D8D9D0;
       border-radius: 30px;
       font-size: 18px;
+
+      .votes-total {
+        font-style: italic;
+        margin-top: 5px;
+      }
     }
 
     div.voted-text{
