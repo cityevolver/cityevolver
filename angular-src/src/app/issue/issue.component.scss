@@ -1,17 +1,36 @@
 $ballot-background: #c20f2c;
+$ballot-button: grey;
 $ballot-button-hover: #890004;
+$ballot-button-text: white;
+$ballot-button-text-hover: white;
+$ballot-main-title: white;
 $ballot-text: white;
+$ballot-voted-area: black;
+$ballot-voted-area-text: white;
+
 $complaint-background: #3C6AA2;
+$complaint-button: grey;
 $complaint-button-hover: #0e417e;
+$complaint-button-text: white;
+$complaint-button-text-hover: white;
+$complaint-main-title: white;
+$complaint-text: white;
+$complaint-voted-area: black;
+$complaint-voted-area-text: white;
+
 $information-background: #DCF14C;
+$information-button: grey;
 $information-button-hover: #a5bc06;
+$information-button-text: white;
+$information-button-text-hover: white;
+$information-main-title: white;
+$information-text: white;
+$information-voted-area: black;
+$information-voted-area-text: white;
 
 section.container {
   max-width: 1000px;
   background-color: #F2F2F2;
-
-
-
   font-family: 'Roboto', sans-serif;
   border: 3px solid #173C40;
 
@@ -26,6 +45,7 @@ section.container {
     padding: 0px 10px;
     text-align: center;
   }
+
   h1{
     max-width: 400px;
     height: 43px;
@@ -85,25 +105,83 @@ section.container {
 
   &.ballot {
     background-color: $ballot-background;
+    color: $ballot-text;
 
-    color: white;
+    h1 {
+      color: $ballot-main-title;
+    }
 
     section.votes-for-voting-container {
       div.vote {
-        color: white;
+        color: $ballot-button-text;
+        background-color: $ballot-button;
 
         &:hover {
+          color: $ballot-button-text-hover;
           background-color: $ballot-button-hover;
         }
       }
     }
+    section.votes-overview-container {
+      div.vote {
+        color: $ballot-voted-area-text;
+        background-color: $ballot-voted-area;
+      }
+    }
+  }
+  &.complaint {
+    background-color: $complaint-background;
+    color: $complaint-text;
 
-    &.complaint {
-      background-color: $complaint-background;
+    h1 {
+      color: $complaint-main-title;
     }
 
-    &.information {
-      background-color: $information-background;
+    section.votes-for-voting-container {
+      div.vote {
+        color: $complaint-button-text;
+        background-color: $complaint-button;
+
+        &:hover {
+          color: $complaint-button-text-hover;
+          background-color: $complaint-button-hover;
+        }
+      }
+    }
+
+    section.votes-overview-container {
+      div.vote {
+        color: $complaint-voted-area-text;
+        background-color: $complaint-voted-area;
+      }
+    }
+  }
+
+  &.information {
+    background-color: $information-background;
+    color: $information-text;
+
+    h1 {
+      color: $information-main-title;
+    }
+
+    section.votes-for-voting-container {
+      div.vote {
+        color: $information-button-text;
+        background-color: $information-button;
+
+        &:hover {
+          color: $information-button-text-hover;
+          background-color: $information-button-hover;
+        }
+      }
+    }
+
+    section.votes-overview-container {
+      div.vote {
+        color: $information-voted-area-text;
+        background-color: $information-voted-area;
+      }
     }
   }
 }
