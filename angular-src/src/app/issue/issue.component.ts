@@ -76,8 +76,19 @@ export class IssueComponent implements OnInit {
 
   // user has voted
   userVoted(responseId: number) {
-    console.info('User has voted for a response number: ', responseId);
-    this.userAlreadyVoted = true;
+    this.dataApi.setVote(this.id, responseId).subscribe(response => {
+      this.userAlreadyVoted = true;
+      this.getIssue();
+    }, error => {
+      console.error(error);
+      this.issueVotes = null;
+      this.issueVotesLoadError = true;
+    });
+  }
+
+  //go back
+  buttonBackClicked() {
+    location.hash = '';
   }
 }
 

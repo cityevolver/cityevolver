@@ -38,9 +38,9 @@ section.container {
    display: flex;
    align-items: center;
    justify-content: center;
-  }
+ }
 
-  p{
+ p {
     margin: 5px auto;
     padding: 0px 10px;
     text-align: center;
@@ -48,41 +48,38 @@ section.container {
 
   h1{
     max-width: 400px;
-    height: 43px;
-    color: #b60505;
     font-family: 'Maven Pro', sans-serif;
     font-size: 36px;
     font-weight: 700;
     line-height: 40px;
     text-align: center;
     vertical-align: top;
-    padding: 20px 0px;
-    margin: 0 auto 50px auto;
+    margin: 10px auto 20px auto;
 
   }
 
-    section.votes-for-voting-container {
-      position: relative;
-      margin-top: 30px;
+  section.votes-for-voting-container {
+    position: relative;
+    margin-top: 30px;
 
-      div.vote {
-        width: 80%;
-        max-width: 400px;
-        text-align: center;
-        cursor: pointer;
-        padding: 30px;
-        margin: 10px auto;
-        box-sizing: border-box;
-        border: 1px solid #173C40;
-        background: #D8D9D0;
-        border-radius: 30px;
-        font-size: 18px;
+    div.vote {
+      width: 80%;
+      max-width: 400px;
+      text-align: center;
+      cursor: pointer;
+      padding: 30px;
+      margin: 10px auto;
+      box-sizing: border-box;
+      border: 1px solid #173C40;
+      background: #D8D9D0;
+      border-radius: 30px;
+      font-size: 18px;
 
-        &:hover {
-          background-color: #3FA69B;
-        }
+      &:hover {
+        background-color: #3FA69B;
       }
     }
+  }
 
   section.votes-overview-container {
     position: relative;
@@ -100,6 +97,20 @@ section.container {
       background: #D8D9D0;
       border-radius: 30px;
       font-size: 18px;
+    }
+  }
+
+  .button-back {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+
+    &.button-back-last {
+      margin-top: 20px;
+      img {
+        width: 100px;
+      }
     }
   }
 

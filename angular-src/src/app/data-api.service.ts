@@ -57,10 +57,27 @@ export class DataApiService {
 
     return this.http.request<any>('GET', path, requestOptions);
   }
+
+  public setVote(issueId: string, voteId: number): Observable<any> {
+    const path = 'https://ec2-3-121-125-47.eu-central-1.compute.amazonaws.com:8080/vote';
+
+    let httpParams = new HttpParams();
+    if (issueId !== undefined && issueId !== null) {
+      httpParams = httpParams.set('issue', issueId);
+    }
+    if (voteId !== undefined && voteId !== null) {
+      httpParams = httpParams.set('response', voteId.toString());
+    }
+    const requestOptions = {
+      params: httpParams
+    };
+
+    return this.http.request<any>('POST', path, requestOptions);
+  }
 }
 
 export class IssueDetail {
-  id: number;
+  id: string;
   title: string;
   description: string;
   issue_type: IssueType;
