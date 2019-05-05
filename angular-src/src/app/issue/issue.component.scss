@@ -1,32 +1,42 @@
-$ballot-background: #c20f2c;
+$ballot-background: #5aa2ff;
 $ballot-button: grey;
-$ballot-button-hover: #890004;
-$ballot-button-text: white;
+$ballot-button-hover: #0074cb;
+$ballot-button-text: black;
 $ballot-button-text-hover: white;
-$ballot-main-title: white;
-$ballot-text: white;
-$ballot-voted-area: black;
-$ballot-voted-area-text: white;
+$ballot-main-title: black;
+$ballot-text: black;
+$ballot-voted-area: #93d3ff;
+$ballot-voted-area-text: black;
 
-$complaint-background: #3C6AA2;
+$complaint-background: #ffa38a;
 $complaint-button: grey;
-$complaint-button-hover: #0e417e;
-$complaint-button-text: white;
-$complaint-button-text-hover: white;
-$complaint-main-title: white;
-$complaint-text: white;
-$complaint-voted-area: black;
-$complaint-voted-area-text: white;
+$complaint-button-hover: #c9735d;
+$complaint-button-text: black;
+$complaint-button-text-hover: black;
+$complaint-main-title: black;
+$complaint-text: black;
+$complaint-voted-area: #ffd5ba;
+$complaint-voted-area-text: black;
 
-$information-background: #DCF14C;
+$information-background: #57c653;
 $information-button: grey;
-$information-button-hover: #a5bc06;
-$information-button-text: white;
-$information-button-text-hover: white;
-$information-main-title: white;
-$information-text: white;
-$information-voted-area: black;
-$information-voted-area-text: white;
+$information-button-hover: #159424;
+$information-button-text: black;
+$information-button-text-hover: black;
+$information-main-title: black;
+$information-text: black;
+$information-voted-area: #8cfa82;
+$information-voted-area-text: black;
+
+$gathering-background: #57c653;
+$gathering-button: grey;
+$gathering-button-hover: #159424;
+$gathering-button-text: black;
+$gathering-button-text-hover: black;
+$gathering-main-title: black;
+$gathering-text: black;
+$gathering-voted-area: #8cfa82;
+$gathering-voted-area-text: black;
 
 section.container {
   max-width: 1000px;
@@ -153,6 +163,34 @@ section.container {
       div.vote {
         color: $complaint-voted-area-text;
         background-color: $complaint-voted-area;
+      }
+    }
+  }
+
+  &.gathering {
+    background-color: $gathering-background;
+    color: $gathering-text;
+
+    h1 {
+      color: $gathering-main-title;
+    }
+
+    section.votes-for-voting-container {
+      div.vote {
+        color: $gathering-button-text;
+        background-color: $complaint-button;
+
+        &:hover {
+          color: $gathering-button-text-hover;
+          background-color: $gathering-button-hover;
+        }
+      }
+    }
+
+    section.votes-overview-container {
+      div.vote {
+        color: $gathering-voted-area-text;
+        background-color: $gathering-voted-area;
       }
     }
   }
