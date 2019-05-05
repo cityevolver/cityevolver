@@ -3,6 +3,8 @@ import json
 import os.path
 from peewee import *
 from playhouse.shortcuts import model_to_dict, dict_to_model
+import qrcode
+import uuid
 
 import realtime
 
@@ -35,6 +37,7 @@ class IssueType(MyModel):
     INFORMATION = 1
     COMPLAINT = 2
     BALLOT = 3
+    GATHERING = 4
     text = CharField()
 
 class Issue(MyModel):
@@ -46,12 +49,29 @@ class Issue(MyModel):
     geo_x = FloatField()
     geo_y = FloatField()
 
+    def add_qr(self):
+        issue_code = IssueCode.create(id=uuid.uuid4(), issue=self.id, force_insert=True)
+        return issue_code.make_qr()
+    
     def to_dict(self):
         d = super(Issue, self).to_dict()
         if self.description.startswith("@get_current_meteodata"):
             param = self.description.split(" ")[1]
             d.update({"description": realtime.get_current_meteodata(param)})
+        d.update({"qr": [code.url() for code in self.codes]})
         return d
+    
+class IssueCode(MyModel):
+    id = UUIDField(primary_key=True)
+    issue = ForeignKeyField(Issue, backref="codes")
+
+    def url(self):
+        return "https://ec2-3-121-125-47.eu-central-1.compute.amazonaws.com:8080/codes/{}.png".format(self.id)
+    
+    def make_qr(self):
+        filename = "codes/{}.png".format(self.id)
+        qrcode.make("https://cityevolver.github.io/#{}".format(self.id)).save(filename)
+        return self.url()
     
 class Response(MyModel):
     issue = ForeignKeyField(Issue, backref="responses")
@@ -76,16 +96,18 @@ def init():
     db.connect()
     if not exists:
         print("Creating db ... ", sep="")
-        db.create_tables([IssueType, Issue, Response, Vote])
+        db.create_tables([IssueType, Issue, IssueCode, Response, Vote])
         
         IssueType.create(id=IssueType.INFORMATION, text="Information")
         IssueType.create(id=IssueType.COMPLAINT, text="Complaint")
         IssueType.create(id=IssueType.BALLOT, text="Ballot")
+        IssueType.create(id=IssueType.GATHERING, text="Gathering")
         
-        Issue.create(id=1, title="Old town square reconstruction",
-                     description="...", author="MHMP",
-                     image_url="http://www4.pictures.zimbio.com/bg/Nicolas+Cage+Nicolas+Cage+Salt+Lake+City+Airport+ihMV26dY4Hul.jpg",
-                     issue_type=3, geo_x=14.4210554, geo_y=50.0875187)
+        issue = Issue.create(id=1, title="Old town square reconstruction",
+                             description="...", author="MHMP",
+                             image_url="http://www4.pictures.zimbio.com/bg/Nicolas+Cage+Nicolas+Cage+Salt+Lake+City+Airport+ihMV26dY4Hul.jpg",
+                             issue_type=IssueType.BALLOT, geo_x=14.4210554, geo_y=50.0875187)
+        issue.add_qr()
         Response.create(issue=1, id=1, text="Plant more trees.", can_have_message=False)
         Vote.create(issue=1, response=1)
         Vote.create(issue=1, response=1)
@@ -93,16 +115,24 @@ def init():
         Vote.create(issue=1, response=2)
         Response.create(issue=1, id=3, text="No reconstruction!", can_have_message=False)
         
-        Issue.create(id=2, title="Should I. P. Pavlova metro station have another entrance?",
-                     description="It's very busy station and another entrance would cut travel time for a lot of people.",
-                     author="MHMP",
-                     issue_type=3, geo_x=14.4304700, geo_y=50.0753122)
+        issue = Issue.create(id=2, title="Should I. P. Pavlova metro station have another entrance?",
+                             description="It's very busy station and another entrance would cut travel time for a lot of people.",
+                             author="MHMP",
+                             issue_type=IssueType.BALLOT, geo_x=14.4304700, geo_y=50.0753122)
+        issue.add_qr()
         Response.create(issue=2, id=4, text="Yes", can_have_message=True, icon_code="check_circle")
         Vote.create(issue=2, response=4)
         Response.create(issue=2, id=5, text="No", can_have_message=True, icon_code="times_circle")
         Vote.create(issue=2, response=5)
         Vote.create(issue=2, response=5, message="No to jste se asi posrali, DEBILOVÉ!!!")
 
+        issue = Issue.create(id=3, title="Pozvánka na 4. řádné zasedání Zastupitelstva MČ Praha 7",
+                             description="4. řádné zasedání Zastupitelstva MČ Praha 7 se koná v pondělí dne 13. května 2019 od 17:00 hodin ve velké zasedací místnosti č. 227 Úřadu městské části, nábř. Kpt. Jaroše 1000, Praha 7.",
+                             author="MČ Praha 7",
+                             image_url="https://www.praha7.cz/wp-content/uploads/2018/02/%C3%BA%C5%99ad.jpg",
+                             issue_type=IssueType.GATHERING, geo_x=14.4339447, geo_y=50.0969988)
+        issue.add_qr()
+        
         print("OK")
 
 def close():
