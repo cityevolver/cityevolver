@@ -1,14 +1,9 @@
 <ng-container *ngIf="allIssuesData">
-
   <section class="container">
-
-
     <h1>
       Welcome to {{ title }}!
     </h1>
-    <h2>Here is the map of issues you can help to solve by your vote! </h2>
-
-    <div id="mapid" style="width: 600px; height: 400px; position: relative;"></div>
+    <div id="mapid"></div>
 
     <section class="list-of-issues-container">
       <p *ngFor="let issue of allIssuesData">
