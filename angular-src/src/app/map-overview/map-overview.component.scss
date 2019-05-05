@@ -13,13 +13,22 @@ section.container {
   }
 
   h1 {
-    color: #173C40;
+    color: black;
     font-family: 'Maven Pro', sans-serif;
     font-size: 60px;
     line-height: 1.5;
     text-align: center;
     vertical-align: top;
-    margin: 0px auto 20px auto;
+    margin: 0px auto 0px auto;
+  }
+  h4 {
+    color: black;
+    font-size: 40px;
+    font-family: 'Maven Pro', sans-serif;
+    line-height: 1.5;
+    text-align: center;
+    vertical-align: top;
+    margin: -10px auto 20px auto;
   }
 
 
