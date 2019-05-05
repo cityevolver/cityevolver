@@ -10,7 +10,7 @@ declare let L;
   styleUrls: ['./map-overview.component.scss']
 })
 export class MapOverviewComponent implements OnInit {
-  title = 'City evolver APP!';
+  title = 'CITIQR!';
 
   @Input() issueTypes: Array<IssueType>;
 
