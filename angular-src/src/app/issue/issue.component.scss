@@ -28,14 +28,14 @@ $information-text: black;
 $information-voted-area: #8cfa82;
 $information-voted-area-text: black;
 
-$gathering-background: #57c653;
+$gathering-background: #c970a4;
 $gathering-button: grey;
-$gathering-button-hover: #159424;
-$gathering-button-text: black;
-$gathering-button-text-hover: black;
+$gathering-button-hover: #661249;
+$gathering-button-text: white;
+$gathering-button-text-hover: white;
 $gathering-main-title: black;
 $gathering-text: black;
-$gathering-voted-area: #8cfa82;
+$gathering-voted-area: #964275;
 $gathering-voted-area-text: black;
 
 section.container {
@@ -48,6 +48,9 @@ section.container {
    display: flex;
    align-items: center;
    justify-content: center;
+   img{
+     width: 50%;
+   }
  }
 
  p {

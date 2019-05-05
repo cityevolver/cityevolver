@@ -2,7 +2,8 @@
 <ng-container *ngIf="issueData">
 
   <section class="container"
-           [ngClass]="{'ballot': issueData.issue_type.id === 3, 'complaint': issueData.issue_type.id === 2, 'information': issueData.issue_type.id === 1}">
+           [ngClass]="{'ballot': issueData.issue_type.id === 3, 'complaint': issueData.issue_type.id === 2, 'information': issueData.issue_type.id === 1,
+            'gathering': issueData.issue_type.id === 4}">
     <div class="button-back"
          (click)="buttonBackClicked()">
       <img id="logo" src="/img/logo.png">
