@@ -9,7 +9,7 @@ export class DataApiService {
   constructor(protected http: HttpClient) { }
 
   public getIssue(id: string): Observable<IssueDetail> {
-    const path = 'https://ec2-3-121-125-47.eu-central-1.compute.amazonaws.com:8080/issue';
+    const path = 'http://ec2-3-121-125-47.eu-central-1.compute.amazonaws.com:8080/issue';
 
     let httpParams = new HttpParams();
     if (id !== undefined && id !== null) {
@@ -23,7 +23,7 @@ export class DataApiService {
   }
 
   public getIssueVotes(issueId: string): Observable<Array<IssueVote>> {
-    const path = 'https://ec2-3-121-125-47.eu-central-1.compute.amazonaws.com:8080/response';
+    const path = 'http://ec2-3-121-125-47.eu-central-1.compute.amazonaws.com:8080/response';
 
     let httpParams = new HttpParams();
     if (issueId !== undefined && issueId !== null) {
@@ -37,7 +37,7 @@ export class DataApiService {
   }
 
   public getAllIssues(): Observable<Array<IssueDetail>> {
-    const path = 'https://ec2-3-121-125-47.eu-central-1.compute.amazonaws.com:8080/issue';
+    const path = 'http://ec2-3-121-125-47.eu-central-1.compute.amazonaws.com:8080/issue';
 
     const httpParams = new HttpParams();
     const requestOptions = {
@@ -48,7 +48,7 @@ export class DataApiService {
   }
 
   public getIssueTypes(): Observable<Array<IssueType>> {
-    const path = 'https://ec2-3-121-125-47.eu-central-1.compute.amazonaws.com:8080/issue_type';
+    const path = 'http://ec2-3-121-125-47.eu-central-1.compute.amazonaws.com:8080/issue_type';
 
     const httpParams = new HttpParams();
     const requestOptions = {
@@ -59,7 +59,7 @@ export class DataApiService {
   }
 
   public setVote(issueId: string, voteId: number): Observable<any> {
-    const path = 'https://ec2-3-121-125-47.eu-central-1.compute.amazonaws.com:8080/vote';
+    const path = 'http://ec2-3-121-125-47.eu-central-1.compute.amazonaws.com:8080/vote';
 
     let httpParams = new HttpParams();
     if (issueId !== undefined && issueId !== null) {
